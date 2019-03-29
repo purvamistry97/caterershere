@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/stylesheets/catererpage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="/static/javascripts/homepage/jquery.jsonslider.min.js"></script>
+</head>
+
+
+<body>
+<% if(Object.keys(sessionUser).indexOf('user') > -1){%>
+    <% if(sessionUser.user.length !== 0){%>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="/static/images/image1.jpg" alt="Los Angeles" style="width:100%; height:500px;">
+              </div>
+          
+              <div class="item">
+                <img src="/static/images/image2.jpg" alt="Chicago" style="width:100%; height:500px;">
+              </div>
+          
+              <div class="item">
+                <img src="/static/images/buffet.jpg" alt="New york" style="width:100%; height:500px;">
+              </div>
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="container">
+            <div class="row section">
+                <div class="col-lg-12">
+                    <div class=cat_name>
+                      <%= Name %>
+                    </div>  
+                    <div class="main-content">
+                        <div class="catergory">
+                            <%var cp = '/catererpage?cid='+ CatererId + '&cname=' + Name%> 
+                            <a class="button_style" href=<%= cp%>><div class="catergory-title">Overview</div></a>
+                            <%var cm = '/caterermenu?cid='+ CatererId + '&cname=' + Name%> 
+                            <a class="button_style" href=<%= cm%>><div class="catergory-title">Menu</div></a>
+                            <%var cc = '/caterercall?cid='+ CatererId + '&cname=' + Name%>
+                            <a class="button_style active" href=<%= cc%>><div class="catergory-title">Contact</div></a>
+                            <%var cb = '/catererbook?cid='+ CatererId + '&cname=' + Name%>
+                            <a class="button_style" href=<%= cb%>><div class="catergory-title">Book</div></a>
+                            <!--  <input type="button" class="button_style" value="Map" onclick=""> -->
+                            <!-- <input type="button" class="button_style" value="Reviews" onclick="">
+                            <input type="button" class="button_style" value="Share" onclick=""> -->
+                            <!-- <input type="button" class="button_style" value="Book" onclick=""> -->
+                        </div>  
+                        <div class="call-section form">
+                            <% if(message === ''){%>
+                                <form role="form" method="POST" action="/catererbook">
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="catererID" value=<%= data.catererID %> />
+                                        <input class="form-control" type="date" placeholder="date" name="EventDate" autofocus=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="cuisineMulti" name="Package">
+                                            <option>Select any Package</option>
+                                            <% if(data){ %>
+                                                <option></option>
+                                                <% data.priceList.forEach(item => { %>
+                                                <option value=<%= item.packageID %>><%= item.displayText %></option>
+                                            <% })} %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Inquiry" name="Inquiry" cols='10' rows="3" ></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Address" name="Address" cols='10' rows="3" ></textarea>
+                                    </div>
+                                    <label class="labels guests">No of Guests</label>
+                                    <div class="checkbox">
+
+                                            <label class="radio-inline"><input class="form-control radio" name="Guests" type="radio" value="lessThan100" />&nbsp;<span style="font-size: 16px;color: gray;">lessThan100</span> </label>
+                                            <label class="radio-inline"><input class="form-control" name="Guests" type="radio" value="lessThan1000" />&nbsp;<span style="font-size: 16px;color: gray;">less Than 1000</span></label>
+                                            <label class="radio-inline"><input class="form-control" name="Guests" type="radio" value="moreThan100" />&nbsp;<span style="font-size: 16px;color: gray;">more Than 1000</span></label>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control event" placeholder="Event" name="Event" type="text" value=""/>
+                                    </div>
+                                    <div>
+                                    </div>
+                                    <input type="submit" value="BOOK ORDER" class="btn btn-primary" />
+                                
+                                </form>
+                            <%}%>
+                            <% if(message === 'Successfull'){%>
+                                <div style="color: green; margin-top: 33%;">
+                                    <p>Congrats!! Your Order is Placed</p>
+                                    <p>You'll be notified regarding the confirmation shortly</p>
+                                </div>
+                                <!-- <div class="goToHomePage success"><a href='/' style="margin-left: 4%;">Go to Home Page</a></div> -->
+                            <%}%>
+                            <div class="goToHomePage"><a href='/' style="margin-left: 4%;">Go to Home Page</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%}%>
+    <% if(sessionUser.user.length === 0){%>
+        <div style="color: darkgray; margin-left: 17%;margin-top: 4%; font-size: 44px;">
+            <p>
+                Sorry, you need to <a href='/customerhome'>log in</a> if you are already a user.
+            </p>
+            <p> If not then you need to first <a href="/register">register</a> with us</p>
+        </div>
+    <%}%>
+<%}%>
+<% if(Object.keys(sessionUser).indexOf('user') === -1){%>
+    <div style="color: darkgray; margin-left: 17%;margin-top: 4%; font-size: 44px;">
+        <p>
+            Sorry, you need to <a href='/customerhome'>log in</a> if you are already a user.
+        </p>
+        <p> If not then you need to first <a href="/register">register</a> with us</p>
+    </div>
+<%}%>
+<script>
+/* var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+} */
+
+$(document).ready(function(){
+        $("input[type='radio']").click(function(){
+            var radioValue = $("input[name='Guests']:checked").val();
+        });
+        
+    });
+</script>
+</body>
+</html> 

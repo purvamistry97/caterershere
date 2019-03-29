@@ -1,0 +1,416 @@
+* {box-sizing: border-box}
+body {font-family: 'Times New Roman', Times, serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+body{
+
+  background-color:whitesmoke;
+  
+}
+
+/* Slideshow container */
+.slideshow-container {
+  width: 100%;
+  height: 50%;
+  position: relative;;
+  margin: auto;
+  z-index: 1;
+  top:0;
+  overflow-y:hidden;
+  
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+.fitting{
+
+  width:400px;
+  height: 400px;
+  object-fit: cover;
+}
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 5px;
+  width: 5px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 25%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+.checked {
+  color: orange;
+}
+.cat_name{
+  font-size: 46px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 2%;
+    /* font-family: cursive; */
+    /* text-decoration: underline; */
+    color: dimgrey;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+.cat_address{
+  font-size: 16px;
+   
+  margin-left: 2%;
+  /* font-family: cursive; */
+  
+  color:gray;
+
+}
+.rating{
+  color: black;
+  display: inline;
+  size: 36px;
+position: absolute;
+top:66%;
+left:80%;
+}
+
+.buttons_format{
+  text-align: center;;
+ margin-left: 15px;
+margin-right: 10px;
+margin-top: 25px;
+
+}
+.button_style{
+font-size: 24px;
+font-family: monospace;
+color: aliceblue;
+border-bottom: dotted;
+border-top: none;
+border-left: none;
+border-right: none;
+background: 0px;
+margin-left: 5%;
+margin-right: 5%;
+cursor: pointer;
+}
+a.button_style{
+  text-decoration: none;
+}
+a.active{
+  color: darkmagenta;
+  opacity: 0.5;
+}
+.overview-section{
+  font-size: 20px;
+  /* font-family: cursive; */
+  color: black;
+  margin-left: 11%;
+  width: 44%;
+  /* margin-right: 0%; */
+  border: 2px solid lightgray;
+  height: 463px;
+  /* margin-top: 2%; */
+  /* width: 54%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
+}
+/* .cuisene{
+  margin-top:1.5%;
+  font-size: 16px;
+   
+  font-family: cursive;
+  color:gray;
+} */
+/* .cuisene_list{
+  margin-top:0.5%;
+ 
+  font-size: 16px;
+  text-decoration: underline;
+  word-spacing: 15px;
+  /* font-family: cursive; */
+ /*  color:black;
+} */ 
+.submit_button{
+  font-size: 18px;
+  /* font-family: monospace; */
+  margin-left: 5%;
+  margin-right: 5%;
+  size:16px;
+  color: green;
+}
+.catergory{
+  margin-left: 2%;
+  margin-bottom: 3%;
+  background-color: lightsteelblue;
+  width: 13%;
+  margin-top: 2%;
+  height: 409px;
+}
+.labels{
+  font-family: helvetica;
+  font-size: 18px;
+  color: gray;
+  /* color: black; */
+  margin-left: 17%;
+  margin-right: 17%;
+  margin-top: 8%;
+  font-weight: bold;
+  display: flex
+}
+.content{
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: -3%;
+}
+.menu-section{
+  font-size: 20px;
+  /* font-family: cursive; */
+  color: black;
+  margin-left: 11%;
+  width: 64%;
+  /* margin-right: 0%; */
+  border: 2px solid lightgray;
+  height: 463px;
+}
+.call-section{
+  font-size: 20px;
+  /* font-family: cursive; */
+  color: black;
+  margin-left: 11%;
+  width: 44%;
+  /* margin-right: 0%; */
+  border: 2px solid lightgray;
+  height: 463px;
+}
+.main-content{
+  display: flex;
+}
+.catergory-title{
+  padding-top: 9%;
+  text-align: center;
+  padding-bottom: 13%;
+}
+div.catergory-title:hover{
+  background-color:lightgray;
+
+}
+div.description{
+  margin-left: 24%;
+}
+div.address{
+  margin-left: 32%;
+}
+div.cuisine{
+  margin-left: 32%;
+}
+div.city{
+  margin-left: 38%;
+}
+div.phone{
+  margin-left: 19%;
+}
+div.email{
+  margin-left: 42%;
+}
+div.call{
+  margin-top: 27%;
+  margin-left: 22%;
+}
+div.email-label{
+  margin-left: 22%;
+}
+div.menu{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+/* .modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+} */
+
+/* @-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+} */
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+div.form{
+  border: none;
+}
+label.guests{
+  margin-left: 0%;
+  margin-top: 0%;
+}
+input.event{
+  margin-top: 5%;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.goToHomePage{
+  margin-left: 75%;
+  font-size: 16px;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: gray;
+  opacity: 1; /* Firefox */
+  font-size: 20px;
+} 
+div.success{
+    /* margin-left: 75%; */
+    margin-top: 21%;
+    font-size: 16px;
+}

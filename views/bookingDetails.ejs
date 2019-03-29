@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>bookingDetails</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/stylesheets/bookingDetails.css">
+    </head>
+    <body class='bg'>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="heading"><h2>Please enter following details to book!</h2></div>
+        <div class="container">
+           
+            <div class="formContainer">
+                <form method="POST" action='/bookingDetails'>
+                    <div class="formContent">
+                        <div class="formTitle">Date of Event: </div>
+                        <div>
+                            <input type="hidden" name="catererID" value=<%= data.catererID %> />
+                            <input class="text" class="inputTags" type="date" name="EventDate" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="formContent">
+                            <div class="formTitle">Enter the package:</div>
+                            <div>
+                                <select class="text" name="Package">
+                                    <% if(data){ %>
+                                        <option></option>
+                                        <% data.priceList.forEach(item => { %>
+                                        <option value=<%= item.packageID %>><%= item.displayText %></option>
+                                    <% })} %>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="formContent">
+                            <div class="formTitle">
+                                Any Inquiry:
+                            </div>
+                            <div>
+                              <textarea type="text" class="text" name="Inquiry" rows='3' cols='10'> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="formContent">
+                             <div class="formTitle">
+                                Address:
+                             </div>
+                             <div>
+                                <textarea type="text" class="text" name="Address" rows='3' cols='10'> </textarea>
+                             </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="formContent">
+                            <div class="formTitle">
+                                No of guests:
+                            </div>
+                            <div style="padding-top: 3%">
+                                <input type="radio" name="guests"/> <span style="color:white"> less Than 100</span>
+                                <input type="radio" name="guests"/> <span style="color:white"> less Than 1000</span>
+                                <input type="radio" name="guests"/> <span style="color:white"> more Than 1000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="formContent">
+                            <div class="formTitle">
+                               Event:
+                            </div>
+                            <div>
+                                <input type="text" class="text" name="Event"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="formContent">
+                            <div style="margin-left:15%;padding-bottom: 5%">
+                                <input class="clickButton" type="Submit" value="Book Order">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>

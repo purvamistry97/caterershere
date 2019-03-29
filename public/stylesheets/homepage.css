@@ -1,0 +1,413 @@
+body {
+	background-image: url("/static/images/slider-1.jpg");
+	background-color: #cccccc;
+	overflow-x: hidden;
+	font-family: 'Times New Roman', Times, serif;
+}
+.title{
+	color:white;
+}
+.Customer{
+	list-style-type: none;
+}
+.caterer{
+	list-style-type: none;
+}
+.link{
+	color:white;
+	text-decoration: none;
+}
+.header {
+	display: flex;
+	border-bottom: 1px solid white;
+}
+.title {
+	color: white;
+	font-size: 25px;
+	padding-right: 1%;
+	border-right: 1px solid;
+}
+.customerArea{
+	margin-left: 2%;
+    font-size: 27px;
+    margin-top: 3%;
+}
+.catererArea{
+	font-size: 25px;
+	margin-top: 2%;
+	margin-left: 3%;
+}
+.link:hover{
+	color: #ffcc00;
+
+}
+.Search{
+	/*display: flex; */
+	margin-left: 27%;
+	margin-top: 8%;
+}
+#searchBar{
+	color: white;
+	background: transparent;
+	width: 454px;
+	height: 42px;
+	border: 1px solid white;
+	border-radius: 6px;
+}
+#searchBar:focus{
+	outline: none;
+}
+.searchBar{
+	width: 167%;
+}
+.multipleSelect {
+	/* margin-top: 3%; */
+	margin-left: 4%;
+	height: 218px;	
+}
+.searchbtn{
+	/* width: 9%; */
+	height: 42px;
+	color: rgb(121, 121, 121);
+	/* margin-top: -13px; */
+	border: 1px solid white;
+	border-radius: 6px;
+	width: 7%;
+	cursor: pointer;
+}
+.searchbtn:hover{
+	background-color: white;
+	opacity:0.5;
+	color: black;
+}
+.searchbutton{
+	color: rgb(121, 121, 121);
+	background-color: transparent;
+	/* width: 100%; */
+	/* height: 42px; */
+	font-size: 14px;
+	border: none;
+	/* font-size: 13px; */
+	/* margin-top: -13%; */
+	margin-top: 8%;
+	margin-left: -29%;
+	cursor: pointer;
+}
+.searchbutton:hover{
+	color: black;
+}
+.select2-container{
+	width: 184.7969px !important;
+}
+.catererList{
+	color: black;
+	text-decoration: none;
+}
+.catererList{
+	/* border: 1px solid white; */ 
+  width: 33%;
+  height: 131px;
+}
+.catererDisplay{
+	/* border: 1px solid white; */
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+}
+.contents{
+	color: #99003d;
+	/* color:#99004d; */
+	margin-left: 21%;
+	margin-top: 1%;
+}
+.catererIndividual{
+	border: 1px solid white;
+	width: 60%;
+	height: 81px;
+	margin-left: 10%;
+	background-color: white;
+	opacity: 0.5;
+
+}
+#name{
+	
+	font-size: 20px;
+  font-weight: bold;
+}
+.First, .Last{
+	color: white;
+	list-style-type: none;
+}
+.customer-name-First{
+
+	font-size: 27px;
+	margin-left: 4%;
+	margin-top: 3%;
+}
+.customer-name-Last{
+
+	font-size: 27px;
+	margin-left: 9px;
+	margin-top: 3%;
+}
+.customer-name{
+	display: flex;
+	margin-left: 42%;
+	margin-top: 3%;
+}
+.logOut{
+	color:white;
+	text-decoration: none;
+}
+.logOut:hover{
+	color:#ffcc00;
+}
+div.logOut{
+	margin-top: 3.5%;
+	font-size: 27px;
+	margin-left: 7%;
+}
+.GuestcustomerArea{
+	font-size: 27px;
+	margin-left: 47%;
+	margin-top: 3%;
+
+}
+.GuestcatererArea{
+	font-size: 27px;
+	margin-top: 3%;
+}
+input,
+input::-webkit-input-placeholder {
+		font-size: 16px;
+		font-family: 'Times New Roman', Times, serif;
+    /* line-height: 3; */
+}
+/* .select2-selection--multiple{
+	background-color: white !important;
+	border: 1px solid white !important;
+	border-radius: 4px;
+	cursor: text;
+} */
+/* .select2-selection--multiple:hover{
+	background-color: #99003d !important;
+	opacity: 0.8;
+	-webkit-input-placeholder-color:black;
+} */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(121, 121, 121);
+  /* opacity: 1;  *//* Firefox */
+}
+/* .btn-outline-primary{
+	background-color: black;
+	color:white;
+	border-color: white;
+
+	
+}
+.navbar-inverse{
+	background-color: black;
+	top: 20px;
+}
+.navbar-nav{
+	color:white;
+	text-align: center;
+}
+div.main{ */
+	/* background-image: url('./../images/Meg-Ryan-Wedding-07-reception-0262-1600x580.jpg');
+	background-repeat: no-repeat;	
+	background-size: cover;
+	background-position:50% 50%; */
+	
+	/* color:rgb(168, 44, 6); */
+	/* height:100vh; */
+	
+	
+	
+/* }	
+.catererList{
+	color:rgb(168, 44, 6)
+}
+.topnav {
+	position: relative;
+	background-color: #333;
+	overflow: hidden;
+  } */
+  
+  /* Style the links inside the navigation bar */
+  /* .topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+  }
+   */
+  /* Change the color of links on hover */
+  /* .topnav a:hover {
+	background-color: #ddd;
+	color: black;
+  } */
+  
+  /* Add a color to the active/current link */
+  /* .topnav a.active {
+	background-color: #4CAF50;
+	color: white;
+  } */
+  
+  /* Centered section inside the top navigation */
+  /* .topnav-centered a {
+	float: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+   */
+  /* Right-aligned section inside the top navigation */
+  /* .topnav-right {
+	float: right;
+  } */
+  
+  /* Responsive navigation menu - display links on top of each other instead of next to each other (for mobile devices) */
+ /*  @media screen and (max-width: 600px) {
+	.topnav a, .topnav-right {
+	  float: none;
+	  display: block;
+	}
+  
+	.topnav-centered a {
+	  position: relative;
+	  top: 0;
+	  left: 0;
+	  transform: none;
+	}
+  }
+.heading{
+	 */
+	/* background-color: rgb(143, 69, 69); */
+    /* width: 22%;
+    height: 64px;
+    margin-top: 2%;
+    margin-left: 33%;
+}
+#Catererhere{
+	color: dodgerblue;
+    padding-left: 8%;
+    
+}
+.bgheader{
+	background-image: url('./../images/Meg-Ryan-Wedding-07-reception-0262-1600x580.jpg');
+	background-repeat: no-repeat;	
+	background-size: cover;
+	background-position:50% 50%;
+	width: 100%;
+	height: 350px;
+}
+.headers{		
+	
+	display: flex;	
+	justify-content: space-around;
+	width: 100%;	  
+	height: 88px;
+}
+.link{
+	text-decoration: none;
+    color: white;
+	font-weight: bold;
+	padding-left: 11%;
+}
+a:hover{
+	color: white;
+}
+.Customer{
+	list-style-type: none;
+	width: 10%;
+	height: 40px; */
+	/* border: 2px solid white; */
+	/* border-radius: 7px; */
+	/* margin-top: 4%;
+} */
+/* .Customer:hover{
+	background-color: black;
+} */
+/* .caterer:hover{
+	background-color: black;
+} */
+/* .caterer{
+	list-style-type: none;
+	width: 10%;
+	height: 40px; */
+	/* border: 2px solid white;
+	border-radius: 7px; */
+/* 	margin-top: 4%;
+}
+.Search{ */
+	/*display: flex; */
+/* 	margin-left: 29%;
+    margin-top: 5%; */
+/* }
+#searchBar{
+	color: white;
+    background: transparent;
+    width: 76%;
+    height: 42px;
+    border: 1px solid white;
+    border-radius: 6px;
+}
+#searchBar:focus{
+	outline: none;
+}
+.searchBar{
+	width: 60%;
+}
+.multipleSelect{
+	margin-top: 3%;
+	
+} */
+/* .multiSelect{
+	display:flex;
+} */
+/* .select2-container {
+	width: 21% !important;
+	margin-left: 1% !important;
+}
+.liLists{
+	list-style-type: none;
+}
+td{
+	width:1%;
+	text-align: center;
+}
+.gridViewCaterer{
+	margin-top: 2%;
+	
+} */
+/* .select2-container .cuisines{
+	margin-left: 5% !important;
+	
+}
+.select2-container select.cuisines{
+	margin-left: 4% !important;
+	padding-left: 4% !important;
+} */
+/* .searchbtn{
+	width: 17%; */
+    /* margin-top: 0%; */
+  /*   margin-left: 4%;
+    height: 39px;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+.btn{
+	padding-left: 31%;
+	color: white;
+	background-color: transparent;
+}
+.btn:hover{
+	color: white;
+}
+.select2-dropdown{
+	margin-left: -14px;
+} */

@@ -1,0 +1,144 @@
+.header{
+    font-family:Helvetica; text-align:center;
+    color:white;
+    font-size: 45px;
+    background-color: black;
+    margin-top:-2%;
+    
+
+}
+body{
+    background-color: rgba(123, 202, 238, 0.849);
+
+}
+.left-part{
+padding-left:20%;
+font-size: 20px;
+}
+.padding{
+/*position: absolute;*/
+background: rgba(123, 202, 238, 0.849);
+border-color: white;
+border-left: none;
+border-right: none;
+border-top: none;
+
+width: 66%;
+margin-top: 1%;
+/* height: 0%; */
+font-size: 15px;
+color: white;
+}
+
+.login-btn{
+    width: 24%;
+    color:black;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    cursor: pointer;
+    background-color:white;
+}
+.login{
+    padding-top: 7%;
+}
+.xyz{
+position: relative;
+left:8%;
+
+}
+.formfield{
+    color: black;
+    font-size: 20px;
+    padding-bottom: 2%;
+    padding-left: 11%;
+    
+}
+.padding:focus{
+    background: rgb(228, 198, 198);
+    color:black;
+}
+.formContainer{
+    display: flex;
+}
+.leftsideForm{
+    padding-left: 3%;
+    width: 48%;
+}
+.rightsideForm{
+    width:50%;
+}
+.cityMulti{
+    background-color:rgba(123, 202, 238, 0.849);
+    color: black;
+    border:white;
+    width: 30%;
+    margin-top: 2%;
+}
+.cityMulti:hover{
+    background-color: rgba(123, 202, 238, 0.849);
+    color: white;
+
+}
+.cuisineMulti{
+    background-color: rgba(123, 202, 238, 0.849);
+    color: black;
+    border:white;
+    width: 30%;
+    margin-top: 2%;
+}
+.cuisineMulti:hover{
+    background-color: rgba(123, 202, 238, 0.849);
+    color: white;
+
+}
+.Submit{
+    width:20%;
+    cursor: pointer;
+    font-size: 23px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+#price{
+    width: 15%;
+   
+}
+
+/*
+#Name{
+    padding-left:0%;
+    margin-left: 8%;
+}
+#Email{
+    padding-left:0%;
+    margin-left: 11%;
+}
+#Password{
+    padding-left:0%;
+    margin-left: 10%;
+}
+#ConfirmPassword{
+    padding-right: 0.5%;
+    margin-left: 5%;
+}
+#Address{
+    padding-right: 0.5%;
+    margin-left: 7%;
+}
+#Phone1{
+    padding-right: 1%;
+    margin-left: 5%;
+}
+#Phone2{
+    padding-right: 1%;
+    margin-left: 5%;
+}
+#description{
+   padding-right: 1%;
+   margin-left:8%
+}
+*/

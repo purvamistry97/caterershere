@@ -1,0 +1,67 @@
+body{
+   height: 100%;
+   overflow: hidden;
+}
+.bg{
+    background-image: url('./../images/blurredbackgroungimage.jpg');
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    width: 42%;
+    /* height: 73%; */
+    margin-left: 5%;
+   
+    margin-top: 11%;
+    border-radius: 5%;
+
+}
+.formContent{
+    padding-left:20%;
+    padding-top:4%;
+    
+}
+
+.heading{
+    color: white;
+    margin-left: 13%;
+    /* margin-top: 0%; */
+    /* top: 2%; */
+    position: absolute;
+    margin-top: -5%;
+}
+.text{
+    width: 77%;
+    padding-top: 1%;
+    font-size: 13px;
+    margin-top: 2%;
+    color: black;
+}
+.text:focus{
+    border:black;
+    
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+#package{
+    padding-left: 0%; 
+}
+.formTitle{
+    font-size: 20px;
+    color:white;
+}
+.clickButton{
+    width:40%;
+    font-size: 23px;
+    cursor: pointer;
+    
+}

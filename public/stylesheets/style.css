@@ -1,0 +1,103 @@
+.leftside-login-intro{
+    width:50%;
+    height:100vh;
+    background-color: black;
+    border:none;
+    justify-content: center;
+}
+body{
+    background-color: grey;
+    font-family: 'Times New Roman', Times, serif;
+}
+.content{
+    display:flex;
+}
+.register{
+    padding-top: 0%;
+    padding-left: 15%;
+    padding-top: 10%;
+}
+.register-btn{
+    width: 24%;
+    font-size: 16px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: rgba(31, 145, 197, 0.849);
+    cursor: pointer;
+    border: none;
+    border-radius:4px; 
+    color: white;
+
+    
+}
+.rightside-login{
+    float: left;
+    background-color: rgba(31, 145, 197, 0.849);
+    width:50%;
+}
+.login-part{
+    padding-left:20%; 
+}
+.name_pass{
+    background-color:rgba(31, 145, 197, 0.849);
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    width: 70%;
+    font-size: 16px;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    color: white;
+    
+}
+::placeholder{
+    color:grey;
+}
+:-ms-input-placeholder{
+    color:grey;
+}
+::-ms-input-placeholder{
+    color:grey;
+}
+.login-btn{
+    width: 24%;
+    color: rgba(31, 145, 197, 0.849);
+    font-size: 18px;
+    border-radius: 5px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    cursor: pointer;
+}
+.login{
+    padding-top: 7%;
+}
+a{
+    text-decoration: none;
+    color:white;
+    padding-left:8%; 
+    cursor: pointer;
+}
+.leftside-register{
+    width:50%;
+    height:100vh;
+    background-color: black;
+    border:none;
+     
+}
+.register-part{
+    padding-left:20%;
+}
+.name_pass_register{
+    background-color:black;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    width: 70%;
+    font-size: 16px;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    color:white;
+    
+}

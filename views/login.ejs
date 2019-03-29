@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>login</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/stylesheets/style.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="container">
+            <div class="content">
+                    <div class="leftside-login-intro">
+                            <div style="color:white;font-family: Helvetica;padding-top:20%;padding-left: 15%">
+                                <h1>Welcome</h1>
+                            </div>
+                            <div>
+                                <p style="font-family:Helvetica;font-size: 20px;color:grey;padding-left: 15%;">
+                                    Register here to create your account<br><br>
+                                </p>
+                                <p style="font-family:Helvetica;font-size: 15px;color:grey;padding-left: 15%;text-align:justify">
+                                   Login here if you already have the account. You can also enjoy the <br> searching services  
+                                    without any registration, by entering back into the guest acount.  <br>Our website will give you the 
+                                    the services which will help ypu suggest the best <br> caterers for you according to your requirements.
+                                </p>
+                            </div>
+                            <div class="register">
+                                <button onclick="location.href='/register'" class="register-btn">REGISTER HERE</button>
+                            </div>
+                            
+                     </div>
+                     <div class="rightside-login">
+                        <div>
+                             <p style="color:white;font-family:Helvetica;font-size:45px;padding-left: 11%;padding-top: 16%">
+                                Or login to your account</p>
+                        </div>
+                        <div class="login-part">
+                            <form method="post" action="/login">
+                                    <div>
+                                        <p style="color:red;font-family:Helvetica;font-size:45px;padding-left: 11%"><%= message %></p>
+                                    </div>
+                                    <div>
+                                        <input class="name_pass" type="text" placeholder="Your email" name="email"/>
+                                    </div><br>
+            
+                                    <div>
+                                        <input class="name_pass" type="password" placeholder="Password" name="password"/>
+                                    </div><br>
+                                    <div class="login">
+                                        <input type="submit" class="login-btn" /><a>Forgot password?</a>
+                                        <a href="/" style=" text-decoration: underline" >Enter as guest</a> 
+                                    </div>    
+                            </form>
+                            
+                         </div>
+                     </div>
+            </div>
+                
+        </div>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
