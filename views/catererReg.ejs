@@ -15,12 +15,13 @@
     </head>
     <body>
         <div class="row">
+            <div class="goToHomePage"><a href='/' style="margin-left: 4%;"><img src="/static/images/left-arrow-key.png"></a></div>
             <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <% if(message === ''){%>
                         <div class="panel-heading">Register</div>
                         <div class="panel-body">
-                            <form role="form" method="POST" action="/catererReg">
+                            <form role="form" method="POST" action="/catererReg" id="catererreg">
                                 <fieldset>
                                     <div class="form-group">
                                         <input class="form-control" type="text" placeholder="Name" name="Name" autofocus=""/>
@@ -29,7 +30,7 @@
                                         <input class="form-control" type="email" placeholder="Email" name="Email" autofocus=""/>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="Password" type="password" value=""/>
+                                        <input id="Password" class="form-control" placeholder="Password" name="Password" type="password" value=""/>
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Confirm Password" name="ConfirmPassword" type="password" value=""/>
@@ -38,11 +39,11 @@
                                         <textarea class="form-control" placeholder="Address" name="Address" cols='10' rows="3" ></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Phone 1" name="Phone1" type="number" value=""/>
+                                        <input class="form-control" pattern="((\+*)((0[ -]+)*|(91 )*)(\d{12}+|\d{10}+))|\d{5}([- ]*)\d{6}" placeholder="Phone 1" name="Phone1" type="number" value=""/>
                                     </div>
                                     <div class="form-group">
 
-                                        <input class="form-control" placeholder="Phone 2" name="Phone2" type="number" value=""/>
+                                        <input class="form-control" pattern="((\+*)((0[ -]+)*|(91 )*)(\d{12}+|\d{10}+))|\d{5}([- ]*)\d{6}" placeholder="Phone 2" name="Phone2" type="number" value=""/>
                                     </div>
                                     <div class="formfield">
                                         <Label>Packages:</Label>
@@ -51,6 +52,8 @@
                                         <%})%>
 
                                     </div>
+                                    <label>Minimun no of persons served</label>
+                                    <input class="form-control" placeholder="Min People" name="min_value" type="number"     value=""/>
                                     <label>No of Persons</label>
                                     <div class="checkbox">
                                         <label>
@@ -72,7 +75,7 @@
                                         </select>
                                         <label>press command(mac os)/ctrl(windows) along with click to select multiple</label>
                                     </div>
-                                    <label>Caterers:</label>
+                                    <label>Cuisines:</label>
                                     <div>
                                         <div>
                                             <select class="cuisineMulti" name="cuisineMulti" multiple>
@@ -84,24 +87,34 @@
                                         </div>
                                     
                                     </div>
-                                    <input type="submit" value="Register" class="btn btn-primary" />
+                                    <input id="submit" type="submit" value="Register" class="btn btn-primary" />
                                     <a href="/catererhome" class="btn btn-primary" style="margin-left: 3%;">Login</a>
-                                    <a href='/' style="margin-left: 4%;">Go to Home Page</a>
                                 </fieldset>
                             </form>
                         </div>
                     <%}%>
-                    <%if(message !== ''){%>
+                    <%if(message === 'Success'){%>
                         <div class="panel-body">
                                 <form role="form" method="POST" action="/catererReg">
                                     <fieldset>
                                         <div>
                                             <img src="https://img.icons8.com/color/48/000000/ok.png">
-                                            <p style="color:green;font-size: 21px;margin-top: 2%;margin-left: 6%;"><%=message%></p>      
+                                            <p style="color:green;font-size: 21px;margin-top: 2%;margin-left: 6%;">Congrats..!! Registered successfully</p>      
                                         </div>
-                                        
                                         <a href="/catererhome" class="btn btn-primary" style="margin-top: 4%;margin-left: 24%">Login</a>
-                                        <a href='/' style="margin-left: 4%;">Go to Home Page</a>    
+                                    </fieldset>
+                                </form>
+                            </div>
+                    <%}%>
+                    <%if(message === 'fail'){%>
+                        <div class="panel-body">
+                                <form role="form" method="POST" action="/catererReg">
+                                    <fieldset>
+                                        <div>
+                                            <!-- <img src="https://img.icons8.com/color/48/000000/ok.png"> -->
+                                            <p style="color:red;font-size: 21px;margin-top: 2%;margin-left: 6%;">Failed due to some ERROR..Please try again</p>      
+                                        </div>
+                                        <a href="/catererReg" class="btn btn-primary" style="margin-top: 4%;margin-left: 24%">Try Again</a>
                                     </fieldset>
                                 </form>
                             </div>
@@ -115,11 +128,84 @@
         
         <script src="" async defer></script>
         <script src="/static/javascripts/caterers/jquery-1.11.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <!--  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.js" type="text/javascript"></script> -->
         <script src="/static/javascripts/caterers/bootstrap.min.js"></script>
         <script>
-            $('.chk').click(function(){
+            
+            /* jQuery.validator.addMethod("phoneno", function(phone_number, element) {
+    	    phone_number = phone_number.replace(/\s+/g, "");
+    	    return this.optional(element) || phone_number.length > 9 && 
+    	    phone_number.match(/^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/);
+    	}, "<br />Please specify a valid phone number"); */
+            $(document).ready(function() {
+                
+                $("#catererreg").validate(console.log('the validate function called'),{
+                    
+                    rules: {
+                    Name: {required: true,
+                    maxlength: 20
+                    },
+                    Email: {
+                    required: true,
+                    email: true, //add an email rule that willensure the value entered is valid email id.
+                    maxlength: 255,
+                    },
+                    Password:{
+                        required: true,
+                        minlength: 6
+                    },
+                    ConfirmPassword:{
+                        required: true,
+                        equalTo: '#Password'
+                    },
+                    Address: {
+                        required: true,
+                    },
+                    Phone1: 
+                        {matches:"([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})",minlength:10, maxlength:10}
+                    ,
+                    
+                    Price:{
+                        required: true,
+                    },
+                    min_value: {
+                        required: true,
+                    }
+                    },
+                    messages: {
+                        Name: {
+                          required: 'This field is required',
+                        },
+                        
+                        Email: {
+                          required: 'This field is required',
+                        },
+                        Password: {
+                          minlength: 'Password must be at least 6 characters long'
+                        },
+                        ConfirmPassword: "Enter same as password",
+                        Address: {
+                          required: 'This field is required',
+                        },
+                        Phone1: {
+                          required: 'This field is required',
+                        },
+                        Price: {
+                          required: 'This field is required',
+                        },
+                        min_value: {
+                          required: 'This field is required',
+                        },
+                    },
+                    /* submitHandler: function(form) {
+                      form.submit();
+                    } */
+                });
+                $('.chk').click(function(){
                 this.checked ? this.value = 'on' : this.value = ' '
-            })
+            });
+            });
         </script>
     </body>
 </html>

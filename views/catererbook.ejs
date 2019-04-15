@@ -7,8 +7,9 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/stylesheets/catererpage.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/static/javascripts/homepage/jquery.jsonslider.min.js"></script>
 </head>
 
@@ -60,9 +61,9 @@
                             <%var cm = '/caterermenu?cid='+ CatererId + '&cname=' + Name%> 
                             <a class="button_style" href=<%= cm%>><div class="catergory-title">Menu</div></a>
                             <%var cc = '/caterercall?cid='+ CatererId + '&cname=' + Name%>
-                            <a class="button_style active" href=<%= cc%>><div class="catergory-title">Contact</div></a>
+                            <a class="button_style" href=<%= cc%>><div class="catergory-title">Contact</div></a>
                             <%var cb = '/catererbook?cid='+ CatererId + '&cname=' + Name%>
-                            <a class="button_style" href=<%= cb%>><div class="catergory-title">Book</div></a>
+                            <a class="button_style active" href=<%= cb%>><div class="catergory-title">Book</div></a>
                             <!--  <input type="button" class="button_style" value="Map" onclick=""> -->
                             <!-- <input type="button" class="button_style" value="Reviews" onclick="">
                             <input type="button" class="button_style" value="Share" onclick=""> -->
@@ -70,7 +71,7 @@
                         </div>  
                         <div class="call-section form">
                             <% if(message === ''){%>
-                                <form role="form" method="POST" action="/catererbook">
+                                <form role="form" method="POST" action="/catererbook" id="book">
                                     <div class="form-group">
                                         <input class="form-control" type="hidden" name="catererID" value=<%= data.catererID %> />
                                         <input class="form-control" type="date" placeholder="date" name="EventDate" autofocus=""/>
@@ -101,8 +102,6 @@
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control event" placeholder="Event" name="Event" type="text" value=""/>
-                                    </div>
-                                    <div>
                                     </div>
                                     <input type="submit" value="BOOK ORDER" class="btn btn-primary" />
                                 
@@ -139,6 +138,8 @@
         <p> If not then you need to first <a href="/register">register</a> with us</p>
     </div>
 <%}%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
 /* var slideIndex = 1;
 showSlides(slideIndex);
@@ -168,11 +169,42 @@ function showSlides(n) {
 } */
 
 $(document).ready(function(){
-        $("input[type='radio']").click(function(){
-            var radioValue = $("input[name='Guests']:checked").val();
-        });
-        
+    $("input[type='radio']").click(function(){
+        var radioValue = $("input[name='Guests']:checked").val();
     });
+    $("#book").validate(/* console.log('validate called'), */{
+        rules: {
+        EventDate: {required: true,
+        },
+        Address: {required: true,
+        },
+        Guests: {
+            required: true,
+        },
+        Event:{
+            required: true,
+        }
+        },
+        messages: {
+            EventDate: {
+              required: 'This field is required',
+            },
+            Address: {
+              required: 'This field is required',
+            },
+            Guests: {
+              required: 'This field is required',
+            },
+            Event: {
+              required: 'This field is required'
+            }
+        },
+        submitHandler: function(form) {
+          form.submit();
+        }
+    });
+});
+                    
 </script>
 </body>
 </html> 

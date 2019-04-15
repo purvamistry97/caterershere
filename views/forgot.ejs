@@ -6,52 +6,53 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>catererHome</title>
+        <title>Forgot Password</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/static/stylesheets/caterer/bootstrap.min.css" rel="stylesheet">
-	    <link href="/static/stylesheets/caterer/datepicker3.css" rel="stylesheet">
-	    <link href="/static/stylesheets/caterer/styles.css" rel="stylesheet">
+        <link href="/static/stylesheets/customer/home/bootstrap.min.css" rel="stylesheet">
+	    <link href="/static/stylesheets/customer/home/datepicker3.css" rel="stylesheet">
+	    <link href="/static/stylesheets/customer/home/styles.css" rel="stylesheet">
     </head>
     <body>
         <div class="row">
-            <div class="goToHomePage"><a href='/' style="margin-left: 4%;"><img src="/static/images/left-arrow-key.png"></a></div>
             <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
-                    <div class="panel-heading">Log in</div>
+                    <div class="panel-heading">Forgot Password</div>
                     <div class="panel-body">
-                        <form role="form" method="POST" action="/catererhome">
+                        <form role="form" method="POST" action="/forgot">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <div class="checkbox">
+                                </div> -->
+                                <!-- <div class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                     </label>
+                                </div> -->
+                                <!-- <div>
+                                    <a href="/forgot">Forgot Password ?</a>
+                                </div> -->
+                                <div style="margin-top: 3%">
+                                    <input type="submit" value="Reset Password" class="btn btn-primary" />
+                                    <!-- <a href="/register" class="btn btn-primary" style="margin-left: 4%">Register</a> -->
                                 </div>
-                               <input type="submit" value="login" class="btn btn-primary" />
-                                <a href="/catererReg" class="btn btn-primary" style="margin-left: 2%">Register</a>
                                 <p style="color:red"><%=message%></p>
                             </fieldset>
                         </form>
-                       
                     </div>
-                    
                 </div>
-                
+                <div style="margin-left: 39%;"><a href="/customerhome" style="color: white; font-size: 19px; margin-left: -4%;">Back</a></div>
             </div><!-- /.col-->
-           
         </div><!-- /.row -->	
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
         <script src="" async defer></script>
-        <script src="/static/javascripts/caterers/jquery-1.11.1.min.js"></script>
-        <script src="/static/javascripts/caterers/bootstrap.min.js"></script>
+        <script src="/static/javascripts/customer/home/jquery-1.11.1.min.js"></script>
+        <script src="/static/javascripts/customer/home/bootstrap.min.js"></script>
     </body>
 </html>

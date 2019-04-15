@@ -1,8 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var session = require('cookie-session');
+var nodemailer = require('nodemailer');
+var async = require('async');
+var crypto = require('crypto');
 var multer  = require('multer');
 var _ = require('underscore');
+var pass = require('dotenv').config();
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/uploads/')
@@ -116,7 +120,7 @@ router.post('/', function(req,res){
   console.log('the req body is', req.body);
   let query = 'SELECT ct.* FROM CaterersHere.Caterers as ct, CaterersHere.CatererCities as city, CaterersHere.CatererCuisines as cs';
   query += ' where ct.Name like"%'+ req.body.search + '%"';
-  if(req.body.cities.length > 0){
+  if(Object.keys(req.body).indexOf('cities') !== -1){
     if(req.body.cities.length === 1){
       query += ' AND city.CityId in ('+ req.body.cities + ')';
     }
@@ -124,7 +128,7 @@ router.post('/', function(req,res){
       query += ' AND city.CityId in ('+ req.body.cities.join(',') + ')';
     }
   }
-  if(req.body.cuisines.length > 0){
+  if(Object.keys(req.body).indexOf('cuisines') !== -1){
     if(req.body.cuisines.length === 1){
       query += ' AND cs.CuisineId in (' + req.body.cuisines + ')';
     }
@@ -140,10 +144,38 @@ router.post('/', function(req,res){
     }
     else{
       // console.log('results::', Result);
-      // console.log('Query::', query);
-      pool.query('Select * from CaterersHere.Users where UserID=' + req.session.user.UserID, function(usrErr, usrResult){
-        if(usrErr){
-          res.render('index', {isError: true, caterers:[], sessionUser : req.session.user, searchedCaterer:[]})
+      // console.log('Query::', quer
+      if(Object.keys(req.session).indexOf('user') !== -1){
+        if(req.session.user.length > 0){
+          pool.query('Select * from CaterersHere.Users where UserID=' + req.session.user.UserID, function(usrErr, usrResult){
+            if(usrErr){
+              res.render('index', {isError: true, caterers:[], sessionUser : req.session.user, searchedCaterer:[]})
+            }
+            else{
+              var updatedInfo = Result.map(item =>{
+                return{ 'CatererId': item.CatererId, 'Name': item.Name, 'Address': item.Address, 'Phone1': item.Phone1, 'Phone2':item.Phone2,
+                  'Email': item.Email, 'lessThan100': item.lessThan100, 'lessThan1000': item.lessThan1000, 'moreThan1000':item.moreThan1000
+                }
+              })
+              let distinct = [];
+              updatedInfo.forEach((item)=>{
+                let index = distinct.findIndex((x) => x.CatererId === item.CatererId);
+                if(index === -1){
+                  distinct.push(item);
+                }
+              })
+              console.log('distinct::', distinct);
+              console.log('the updated info is:', updatedInfo); 
+              var uniqueArr = _.uniq(updatedInfo, function(x){ return x.id});
+              console.log('the unique info is:', uniqueArr);
+              res.render('index', { isError: '', caterers: [], searchedCaterer: distinct, sessionUser : req.session.user, 
+              userData: usrResult.map(item=>{
+                return{
+                  "FirstName": item.FirstName, "LastName": item.LastName
+                }
+              })});
+            }
+          })
         }
         else{
           var updatedInfo = Result.map(item =>{
@@ -163,13 +195,32 @@ router.post('/', function(req,res){
           var uniqueArr = _.uniq(updatedInfo, function(x){ return x.id});
           console.log('the unique info is:', uniqueArr);
           res.render('index', { isError: '', caterers: [], searchedCaterer: distinct, sessionUser : req.session.user, 
-          userData: usrResult.map(item=>{
-            return{
-              "FirstName": item.FirstName, "LastName": item.LastName
-            }
-          })});
+          userData: []
+          });
         }
-      })
+      }
+      else{
+        var updatedInfo = Result.map(item =>{
+          return{ 'CatererId': item.CatererId, 'Name': item.Name, 'Address': item.Address, 'Phone1': item.Phone1, 'Phone2':item.Phone2,
+            'Email': item.Email, 'lessThan100': item.lessThan100, 'lessThan1000': item.lessThan1000, 'moreThan1000':item.moreThan1000
+          }
+        })
+        let distinct = [];
+        updatedInfo.forEach((item)=>{
+          let index = distinct.findIndex((x) => x.CatererId === item.CatererId);
+          if(index === -1){
+            distinct.push(item);
+          }
+        })
+        console.log('distinct::', distinct);
+        console.log('the updated info is:', updatedInfo); 
+        var uniqueArr = _.uniq(updatedInfo, function(x){ return x.id});
+        console.log('the unique info is:', uniqueArr);
+        res.render('index', { isError: '', caterers: [], searchedCaterer: distinct, sessionUser : req.session.user, 
+        userData: []
+        });
+      }
+      
     }
   })
   
@@ -188,7 +239,6 @@ router.get('/register', function(req, res, next) {
 
 // Post Register
 router.post('/register', function(req, res, next) {
-  
   pool.query('insert into Users (Email, Password, FirstName, Lastname, CreatedDate, ModifiedDate, ModifiedBy ) values("' + req.body.email + ' ", "' + req.body.password + '", "' + req.body.firstName + '", "' + req.body.lastName + '", CURTIME() , CURTIME() , null)', function (error, results, fields) {
     if(error){
       res.render('register', {
@@ -338,7 +388,7 @@ router.get('/catererorder', function(req, res, next){
             }),
             orderList : orderResult.map(item =>{
               return{ 'OrderId': item.OrderId, 'EventDate': new Date(item.EventDate).toDateString(), 'Address': item.Address, 'PackageName': item.PackageName, 'Inquiry':item.Inquiry,
-                'Event': item.Event, 'lessThan100': item.lessThan100, 'lessThan1000': item.lessThan1000, 'moreThan1000':item.moreThan1000, 'UserId': item.UserId, 'Email': item.Email,
+                'Event': item.Event,'Peoples': item.Peoples, 'UserId': item.UserId, 'Email': item.Email,
                 'FirstName': item.FirstName, 'LastName': item.LastName
               }
             })
@@ -709,7 +759,7 @@ router.post('/catererReg', function(req, res, next){
   pool.query('insert into Caterers(Name, Password, ConfirmPassword, Address, Phone1, Phone2, Email, lessThan100, lessThan1000, moreThan1000, Description) values("' + req.body.Name + '","' + req.body.Password + '","' + req.body.ConfirmPassword + '","' + req.body.Address + '","' + req.body.Phone1 + '","' + req.body.Phone2 + '","' + req.body.Email + '","'+ req.body.lessThan100 + '","' + req.body.lessThan1000 + '","' + req.body.moreThan1000 + '","' + req.body.description + '")',function(regError, regResults){
     if(regError){
       console.log('caterer err');
-      res.render('catererReg', {isError: true, message: 'failed'});
+      res.render('catererReg', {isError: true, message: 'fail'});
       //console.log('error!!',error);
     }
     else{
@@ -775,7 +825,7 @@ router.post('/catererReg', function(req, res, next){
                             else{
                               res.render('catererReg', {
                                 isError: false,
-                                message: ' Congrats..!! Registered successfully',
+                                message: 'Success',
                                 cities: cityresults.map(item => {
                                   return { 'CityId': item.CityId, 'CityName': item.CityName }
                                 }),
@@ -908,6 +958,7 @@ router.get('/caterermenu', function(req, res){
       res.render('error', {error:{status: true, stack:[]}, message:'uploadErr',CatererId: [], Name: ''})
     }
     else{
+      console.log('the upload result is:', UploadResult);
       res.render('caterermenu', {error:{status: false, stack:[]}, message:'successfull',
       CatererId: req.query.cid, Name: req.query.cname,
       uploadInfo: UploadResult.map(item => {
@@ -983,8 +1034,8 @@ router.get('/catererbook', function(req, res){
 /* POST METHOD FOR CATERER BOOKING */
 
 router.post('/catererbook', function(req, res, next){
-  console.log('insert into CaterersHere.Orders(EventDate, Package, Inquiry, Peoples, Event, CatererId, UserId, Address) values("' + req.body.EventDate + '","' + req.body.Package + '","' + req.body.Inquiry + '","' + req.body.Guests + '","' + req.body.Event + '","' + req.body.catererID + '","' + userid + '","' + req.body.Address + '")') 
-  pool.query('insert into CaterersHere.Orders(EventDate, Package, Inquiry, Peoples, Event, CatererId, UserId, Address) values("' + req.body.EventDate + '","' + req.body.Package + '","' + req.body.Inquiry + '","' + req.body.Guests + '","' + req.body.Event + '","' + req.body.catererID + '","' + userid + '","' + req.body.Address + '")', function(error, orderResult){
+  console.log('insert into CaterersHere.Orders(EventDate, Package, Inquiry, Peoples, Event, CatererId, UserId, Address) values("' + req.body.EventDate + '","' + req.body.Package + '","' + req.body.Inquiry + '","' + req.body.Guests + '","' + req.body.Event + '","' + req.body.catererID + '","' + req.session.user.UserID + '","' + req.body.Address + '")') 
+  pool.query('insert into CaterersHere.Orders(EventDate, Package, Inquiry, Peoples, Event, CatererId, UserId, Address) values("' + req.body.EventDate + '","' + req.body.Package + '","' + req.body.Inquiry + '","' + req.body.Guests + '","' + req.body.Event + '","' + req.body.catererID + '","' + req.session.user.UserID + '","' + req.body.Address + '")', function(error, orderResult){
     if(error){
       console.log('error', error);
       res.render('error', { error:{status: true, stack:[]}, message: 'Some error Occured', CatererId: req.query.cid, Name: req.query.cname});
@@ -1005,7 +1056,7 @@ router.get('/demo', function(req, res){
 /* GET METHOD FOR CUSTOMER HISTORY */
 router.get('/customerhistory', function(req, res){
   console.log('the sesion is:', req.session);
-  let query = 'SELECT  co.OrderId,cp.PackageName, co.EventDate, co.Event, co.Address,co.lessThan100, co.lessThan1000, co.moreThan1000, co.Inquiry, co.CatererId, us.Email, us.FirstName, us.LastName, cc.Name FROM CaterersHere.Orders as co , CaterersHere.Packages as cp, CaterersHere.Users as us, CaterersHere.Caterers as cc where co.CatererId = cc.CatererId AND co.Package = cp.PackageId AND co.UserId = us.UserID AND us.UserId =' + req.session.user.UserID;
+  let query = 'SELECT  co.OrderId,cp.PackageName, co.EventDate, co.Event, co.Address,co.Peoples, co.Inquiry, co.CatererId, us.Email, us.FirstName, us.LastName, cc.Name FROM CaterersHere.Orders as co , CaterersHere.Packages as cp, CaterersHere.Users as us, CaterersHere.Caterers as cc where co.CatererId = cc.CatererId AND co.Package = cp.PackageId AND co.UserId = us.UserID AND us.UserId =' + req.session.user.UserID;
   pool.query(query, function(historyErr, historyResult){
     if(historyErr){
       console.log('user error');
@@ -1014,22 +1065,17 @@ router.get('/customerhistory', function(req, res){
     else{
       pool.query('Select * from CaterersHere.Users WHERE UserID=' + req.session.user.UserID, function(usrErr, usrResult){
         if(usrErr){
+          console.log('he usr err:', usrErr);
           res.render('customerprofile', {isError: true});
         }
         else{
-          console.log('the history::',historyResult.map(item => {
-            return{
-              'CatererName': item.Name, 'Package': item.Package, 'EventDate': item.EventDate, 'Inquiry': item.Inquiry,
-              'Event': item.Event, 'Address': item.Address, 'lessThan100': item.lessThan100, 'lessThan1000': item.lessThan1000,
-              'moreThan1000': item.moreThan1000
-            }
-          }) )
+          console.log('the usrResult is:', usrResult);
+          console.log('the history::',historyResult)
           res.render('customerhistory', {isError: false, 
             history: historyResult.map(item => {
               return{
                 'CatererName': item.Name, 'Package': item.PackageName, 'EventDate': new Date(item.EventDate).toDateString(), 'Inquiry': item.Inquiry,
-                'Event': item.Event, 'Address': item.Address, 'lessThan100': item.lessThan100, 'lessThan1000': item.lessThan1000,
-                'moreThan1000': item.moreThan1000
+                'Event': item.Event, 'Address': item.Address, Peoples: item.Peoples
               }
             }),
             userData: usrResult.map(item=>{
@@ -1119,5 +1165,86 @@ router.post('/customerprofile', function(req, res){
       }
     })
   }
+})
+
+/* Get Method FORGOT PASSWORD */
+router.get('/forgot', function(req, res){
+  res.render('forgot', {message: ''});
+})
+
+/* Post Method FORGOT PASSWORD */
+
+router.post('/forgot', function(req, res){
+  async.waterfall([
+    function(done){
+      crypto.randomBytes(20, function(err, buf){
+        var token = buf.toString('hex');
+        done(err, token);
+        console.log('the token is:', token);
+      });
+    },
+    function(token, done){
+      console.log('the Email is:', req.body.email)
+      let query = 'Select * from CaterersHere.Users where Email="' + req.body.email + '"';
+      pool.query(query, function(usrErr, usr){
+        if(usrErr){
+          console.log('the erris:', usrErr);
+          res.render('error', {error:{ stack:[], status: 'true'}, message:'Error occured in getting the user data'})
+        }
+        else{
+          console.log('the result is:', usr);
+          if(usr.length > 0){
+            // 1hour
+            pool.query('Update CaterersHere.Users SET resetPasswordToken="' + token + '"where UserID="' + usr[0].UserID + '"', function(err){
+              if(err){
+                console.log('update err', err);
+                res.render('error', {error: {stack: [], status:'true'}, message:'update Err'});
+              }
+              else{
+                res.render('forgot', {message: ''});
+                done(err, token, usr);
+              }
+            })
+            
+          /*   usr.save(function(err){
+              done(err, token, usr);
+            }) */
+          }
+          else{
+            res.render('forgot', {message: 'Sorry your Email doesnt Exist'});
+          }
+        }
+      })
+    },
+    function(token, usr, done){
+      console.log('smtp function called');
+      var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth:{
+          user: 'purvamistry97@gmail.com',
+          pass: process.env.GMAILPW
+        }
+      });
+      var mailOptions = {
+        to: usr[0].Email,
+        from: 'purvamistry97@gmail.com',
+        subject: 'Reset password',
+        text: 'you are receiving the mail..Please click on the following link to reset your password http://' + req.headers.host +
+              '/reset/' + token + '.',
+      }
+      smtpTransport.sendMail(mailOptions, function(err){
+        console.log('mail sent');
+        
+        done(err, 'done');
+      })
+    }
+  ], function(err){
+      if(err) return res.render('error', {error:{stack: [], status:'true'}, message:'this is the last err err'});
+      else{
+        return res.render('forgot', {message: 'the email has been sent to ' + usr[0].Email + ' with futher instructions'});
+      }
+      
+    }
+  )
 })
 module.exports = router;

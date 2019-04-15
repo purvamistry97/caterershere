@@ -8,8 +8,8 @@
 	<link href="/static/stylesheets/customer/others/font-awesome.min.css" rel="stylesheet">
 	<link href="/static/stylesheets/customer/others/datepicker3.css" rel="stylesheet">
 	<link href="/static/stylesheets/customer/others/styles.css" rel="stylesheet">
-	<link href="/static/stylesheets/customer/others/datatables.css" rel="stylesheet">
-	<link href="/static/stylesheets/customer/others/datatables.min.css" rel="stylesheet">
+	<link href="/static/stylesheets/caterer/datatables.css" rel="stylesheet">
+	<link href="/static/stylesheets/caterer/datatables.min.css" rel="stylesheet">
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -158,20 +158,10 @@
 							<td><%= item.CatererName%></td>
 							<td><%= item.Package%></td>
 							<td><%= item.EventDate%></td>
-							<% if(item.lessThan100 === 'on') {%>
-								<td>lessThan100</td>
-							<%}%>
-							<% if(item.lessThan1000 === 'on') {%>
-								<td>lessThan1000</td>
-							<%}%>
-							<% if(item.moreThan1000 === 'on') {%>
-								<td>moreThan1000</td>
-							<%}%>
+							<td><%= item.Peoples%></td>
 							<td><%= item.Inquiry%></td>
 							<td><%= item.Event%></td>
 							<td><%= item.Address%></td>
-						
-							
 						</tr>
 					<%})%>
 				</tbody>
@@ -187,7 +177,6 @@
 					</tr>
 				</tfoot>
 			</table>
-			
 		</div>
 		<!-- <div class="panel panel-container">
 			<div class="row">
@@ -542,10 +531,10 @@
 	<!-- </div> -->	<!--/.main-->
 	
 	<script src="/static/javascripts/customer/others/jquery-1.11.1.min.js"></script>
-	<script src="/static/javascripts/customer/others/bootstrap.min.js"></script>
-	<script src="/static/javascripts/customer/others/datatables.js"></script>
-	<script src="/static/javascripts/customer/others/datatables.min.js"></script>
+	<script src="/static/javascripts/caterers/datatables.js"></script>
+	<script src="/static/javascripts/caterers/datatables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="/static/javascripts/customer/others/bootstrap.min.js"></script>
 	<!-- <script src="/static/javascripts/customer/others/chart.min.js"></script>
 	<script src="/static/javascripts/customer/others/chart-data.js"></script>
 	<script src="/static/javascripts/customer/others/easypiechart.js"></script>

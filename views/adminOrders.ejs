@@ -3,15 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> Profile</title>
-	<link href="/static/stylesheets/customer/others/bootstrap.min.css" rel="stylesheet">	
-	<link href="/static/stylesheets/customer/others/font-awesome.min.css" rel="stylesheet">
-	<link href="/static/stylesheets/customer/others/datepicker3.css" rel="stylesheet">
-	<link href="/static/stylesheets/customer/others/styles.css" rel="stylesheet">
-	<link href="/static/stylesheets/customer/others/datatables.css" rel="stylesheet">
-	<link href="/static/stylesheets/customer/others/datatables.min.css" rel="stylesheet">
+	<title>Dashboard</title>
+	<link href="/static/stylesheets/caterer/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/stylesheets/caterer/font-awesome.min.css" rel="stylesheet">
+	<link href="/static/stylesheets/caterer/datepicker3.css" rel="stylesheet">
+	<link href="/static/stylesheets/caterer/styles.css" rel="stylesheet">
+	<link href="/static/stylesheets/caterer/datatables.css" rel="stylesheet">
+	<link href="/static/stylesheets/caterer/datatables.min.css" rel="stylesheet">
+	
 	<!--Custom Font-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
 	<!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
@@ -25,7 +26,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="/"><span>Home Page</span></a>
+				<a class="navbar-brand" href="#"><span>Admin</span></a>
 				<!-- <ul class="nav navbar-top-links navbar-right">
 					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
 						<em class="fa fa-envelope"></em><span class="label label-danger">15</span>
@@ -88,21 +89,23 @@
 				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><%= userData[0].FirstName%></div>
+				<div class="profile-usertitle-name">
+					
+				</div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
-		<!-- <form role="search">
+		<form role="search">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search">
 			</div>
-		</form> -->
+		</form>
 		<ul class="nav menu">
-			<li><a href="/customerhistory"><em class="fa fa-dashboard">&nbsp;</em> History</a></li>
-			<li class="active"><a href="/customerprofile"><em class="fa fa-calendar">&nbsp;</em> Profile</a></li>
-			<!-- <li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> </a></li> -->
+			<li ><a href="/admin/adminDashboard"><em class="fa fa-dashboard">&nbsp;</em>Caterers</a></li>
+			<li class="active"><a href="/admin/adminOrders"><em class="fa fa-calendar">&nbsp;</em> Orders</a></li>
+			<li><a href="/admin/adminCustomer"><em class="fa fa-bar-chart">&nbsp;</em>Customers</a></li>
 			<!-- <li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
 			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
@@ -120,7 +123,7 @@
 					</a></li>
 				</ul>
 			</li> -->
-			<li><a href="/customerhome"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="/admin"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -130,236 +133,67 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Profile</li>
+				<li class="active">Orders</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Profile</h1>
+				<h1 class="page-header">Orders</h1>
 			</div>
 		</div><!--/.row-->
 		<div>
-            <form role="form" method="POST" action="/customerprofile">
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input class="form-control" type='text' name="FN" value='<%= userData[0].FirstName%>' placeholder="First Name">
-                </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input class="form-control" type='text' name="LN" value='<%= userData[0].LastName%>' placeholder="Last Name">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" type='email' name="email" value='<%= userData[0].Email%>' placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label>Change Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
-                <!-- <div class="form-group checkbox">
-                    <label>
-                        <input type="checkbox">Remember me
-                    </label>
-                </div> -->
-               <!--  <div class="form-group">
-                    <label>File input</label>
-                    <input type="file">
-                    <p class="help-block">Example block-level help text here.</p>
-                </div> -->
-                <!-- <div class="form-group">
-                    <label>Text area</label>
-                    <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <label>Validation</label>
-                <div class="form-group has-success">
-                    <input class="form-control" placeholder="Success">
-                </div>
-                <div class="form-group has-warning">
-                    <input class="form-control" placeholder="Warning">
-                </div>
-                <div class="form-group has-error">
-                    <input class="form-control" placeholder="Error">
-                </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Checkboxes</label>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">Checkbox 1
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">Checkbox 2
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">Checkbox 3
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">Checkbox 4
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Radio Buttons</label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio Button 1
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio Button 2
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio Button 3
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio Button 4
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Selects</label>
-                        <select class="form-control">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Multiple Selects</label>
-                        <select multiple class="form-control">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                        </select>
-                    </div> -->
-                    <button type="submit" class="btn btn-primary">Update Button</button>
-                    <!-- <button type="reset" class="btn btn-default">Reset Button</button> -->
-                </div>
-            </form>
-        </div>
-		<!-- <div class="panel panel-container">
-			<div class="row">
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-					<div class="panel panel-teal panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-blue"></em>
-							<div class="large">120</div>
-							<div class="text-muted">New Orders</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-					<div class="panel panel-blue panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
-							<div class="large">52</div>
-							<div class="text-muted">Comments</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-							<div class="large">24</div>
-							<div class="text-muted">New Users</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-					<div class="panel panel-red panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-							<div class="large">25.2k</div>
-							<div class="text-muted">Page Views</div>
-						</div>
-					</div>
-				</div>
-			</div> --><!--/.row-->
-		<!-- </div> -->
-		<!-- <div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Site Traffic Overview
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body">
-						<div class="canvas-wrapper">
-							<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> --><!--/.row-->
+			<table id="example" class="display" style="width:100%">
+				<thead>
+					<tr>
+						<th>Customer Name</th>
+						<th>Caterer</th>
+						<th>Address</th>
+						<th>No Of People</th>
+						<th>Package</th>
+						<th>Inquiry</th>
+						<th>Event</th>
+						<th>Event Date</th>
+						<th>Status</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% orders.forEach(item => {%>
+						<tr>
+							<td><%= item.customerName%></td>
+							<td><%= item.catName%></td>
+							<td><%= item.Address%></td>
+							<td><%= item.Peoples%></td>
+							<td><%= item.Package%></td>
+							<td><%= item.Inquiry%></td>
+							<td><%= item.Event%></td>
+							<td><%= item.EventDate%></td>
+							<td><%= item.status%></td>
+							<td><button style="background-color: transparent; border-color: red" type="button" class="btn btn-default">Delete</button></td>
+						</tr>
+					<%})%>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Customer Name</th>
+						<th>Caterer</th>
+						<th>Address</th>
+						<th>No Of People</th>
+						<th>Package</th>
+						<th>Inquiry</th>
+						<th>Event</th>
+						<th>Event Date</th>
+						<th>Status</th>
+						<th>Operation</th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 		
-		<!-- <div class="row">
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>New Orders</h4>
-						<div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Comments</h4>
-						<div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>New Users</h4>
-						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Visitors</h4>
-						<div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span></div>
-					</div>
-				</div>
-			</div>
-		</div> --><!--/.row-->
+		
+				
+			
 		
 		<!-- <div class="row">
 			<div class="col-md-6">
@@ -377,7 +211,7 @@
 												<em class="fa fa-cog"></em> Settings 1
 											</a></li>
 											<li class="divider"></li>
-											<li><a href="#">
+												<li><a href="#">
 												<em class="fa fa-cog"></em> Settings 2
 											</a></li>
 											<li class="divider"></li>
@@ -517,7 +351,7 @@
 						</span></div>
 					</div>
 				</div>
-			</div> --><!--/.col-->
+			</div>-->
 			
 			
 			<!-- <div class="col-md-6">
@@ -597,42 +431,42 @@
 						</ul>
 					</div>
 				</div>
-			</div> --><!--/.col-->
-			<!-- <div class="col-sm-12">
+			</div>
+			<div class="col-sm-12">
 				<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
-			</div> -->
-		<!-- </div> --><!--/.row-->
-	<!-- </div> -->	<!--/.main-->
+			</div>
+		</div> -->
+	</div>	<!--/.main-->
 	
-	<script src="/static/javascripts/customer/others/jquery-1.11.1.min.js"></script>
-	<script src="/static/javascripts/customer/others/bootstrap.min.js"></script>
-	<script src="/static/javascripts/customer/others/datatables.js"></script>
-	<script src="/static/javascripts/customer/others/datatables.min.js"></script>
+	<script src="/static/javascripts/caterers/jquery-1.11.1.min.js"></script>
+	<script src="/static/javascripts/caterers/datatables.js"></script>
+	<script src="/static/javascripts/caterers/datatables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<!-- <script src="/static/javascripts/customer/others/chart.min.js"></script>
-	<script src="/static/javascripts/customer/others/chart-data.js"></script>
-	<script src="/static/javascripts/customer/others/easypiechart.js"></script>
-	<script src="/static/javascripts/customer/others/easypiechart-data.js"></script> -->
-	<script src="/static/javascripts/customer/others/bootstrap-datepicker.js"></script>
-	<script src="/static/javascripts/customer/others/custom.js"></script>
+
+	<script src="/static/javascripts/caterers/bootstrap.min.js"></script>
+	<script src="/static/javascripts/caterers/chart.min.js"></script>
+	<script src="/static/javascripts/caterers/chart-data.js"></script>
+	<script src="/static/javascripts/caterers/easypiechart.js"></script>
+	<script src="/static/javascripts/caterers/easypiechart-data.js"></script>
+	<script src="/static/javascripts/caterers/bootstrap-datepicker.js"></script>
+	<script src="/static/javascripts/caterers/custom.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#example').DataTable( {
-				"columnDefs": [
-					{
-						// The `data` parameter refers to the data for the cell (defined by the
-						// `data` option, which defaults to the column being worked with, in
-						// this case `data: 0`.
-						"render": function ( data, type, row ) {
-							return data +' ('+ row[3]+')'
-						},
-						"targets": 0
-					},
-					{ "visible": false,  "targets": [ 3 ] }
-				]
-			} )
+    		$('#example').DataTable( {
+    		   /*  "columnDefs": [
+    		        {
+    		            // The `data` parameter refers to the data for the cell (defined by the
+    		            // `data` option, which defaults to the column being worked with, in
+    		            // this case `data: 0`.
+    		            "render": function ( data, type, row ) {
+    		                return data +' ('+ row[3]+')'
+    		            },
+    		            "targets": 0
+    		        },
+    		        { "visible": false,  "targets": [ 3 ] }
+    		    ] */
+    		} )
 		} )
 	</script>
-		
 </body>
 </html>

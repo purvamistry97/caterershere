@@ -9,9 +9,9 @@
         <title>customerHome</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/static/stylesheets/customer/others/bootstrap.min.css" rel="stylesheet">
-	    <link href="/static/stylesheets/customer/others/datepicker3.css" rel="stylesheet">
-	    <link href="/static/stylesheets/customer/others/styles.css" rel="stylesheet">
+        <link href="/static/stylesheets/customer/home/bootstrap.min.css" rel="stylesheet">
+	    <link href="/static/stylesheets/customer/home/datepicker3.css" rel="stylesheet">
+	    <link href="/static/stylesheets/customer/home/styles.css" rel="stylesheet">
     </head>
     <body>
         <div class="row">
@@ -19,28 +19,28 @@
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form role="form" method="POST" action="/register">
+                        <form role="form" method="POST" action="/register" id="register">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="First Name" name="firstName" type="text" autofocus="">
+                                    <input class="form-control" placeholder="First Name" name="firstName" type="text" autofocus="" >
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Last Name" name="lastName" type="text" autofocus="">
+                                    <input class="form-control" placeholder="Last Name" name="lastName" type="text" autofocus="" >
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" > 
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="" >
                                 </div>
-                                <div class="checkbox">
+                                <!-- <div class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                     </label>
-                                </div>
+                                </div> -->
                                <input type="submit" value="Register" class="btn btn-primary" />
                                 <a href="/customerhome" class="btn btn-primary" style="margin-left: 2%">Login</a>
-                                <p style="color:red"><%=message%></p>
+                                <p style="color:green"><%=message%></p>
                             </fieldset>
                         </form>
                     </div>
@@ -54,7 +54,80 @@
         <![endif]-->
         
         <script src="" async defer></script>
-        <script src="/static/javascripts/customer/jquery-1.11.1.min.js"></script>
-        <script src="/static/javascripts/customer/bootstrap.min.js"></script>
+        <script src="/static/javascripts/customer/home/jquery-1.11.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="/static/javascripts/customer/home/bootstrap.min.js"></script>
+        <script>
+                /*  console.log(document.forms.register.firstName.value); */
+     
+                 /* function blured(name, value){
+                     if(name === 'firstName'){
+                         if(value.length > 15){
+                             alert('the First name is too long');
+                             
+                         }
+                         if(value.length === 0){
+                             alert('the First name cant be empty');
+                         }
+                     }
+                     if(name === 'lastName'){
+                         if(value.length > 15){
+                             alert('the Last name is too long');
+                             
+                         }
+                         if(value.length === 0){
+                             alert('the Last name cant be empty');
+                         }
+                     }
+                     if(name === 'email'){
+                         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                         if(reg.test(value) === false){
+                             alert('invalid');
+                         }
+                         if(value.length === 0){
+                             alert('The Email is inValid')
+                         }
+                     }
+                     console.log('the value on blurring is:', value);
+                 } */
+                $(document).ready(function() {
+                    $("#register").validate({
+                        rules: {
+                        firstName: {required: true,
+                        maxlength: 20
+                        },
+                        lastName: {required: true,
+                        maxlength: 20
+                        },
+                        email: {
+                            required: true,
+                            email: true,/* /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/ *///add an email rule that will ensure the value entered is valid email id.
+                            maxlength: 255,
+                        },
+                        password:{
+                            required: true,
+                            minlength: 6
+                        }
+                        },
+                        messages: {
+                            firstName: {
+                              required: 'This field is required',
+                            },
+                            lastName: {
+                              required: 'This field is required',
+                            },
+                            email: {
+                              required: 'This field is required',
+                            },
+                            password: {
+                              minlength: 'Password must be at least 6 characters long'
+                            }
+                        },
+                        submitHandler: function(form) {
+                          form.submit();
+                        }
+                    });
+                });
+        </script>
     </body>
 </html>
